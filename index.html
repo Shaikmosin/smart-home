@@ -1,0 +1,32 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smart Room Control</title>
+</head>
+<body>
+  <h2>Smart Room Controller</h2>
+
+  <label>
+    <input type="checkbox" onchange="toggleDevice('light', this.checked)">
+    Light
+  </label><br>
+
+  <label>
+    <input type="checkbox" onchange="toggleDevice('fan', this.checked)">
+    Fan
+  </label>
+
+  <script>
+    function toggleDevice(device, state) {
+      fetch(`http://localhost:3000/api/device/${device}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ state })
+      }).then(res => res.json()).then(data => {
+        console.log('Response:', data);
+      });
+    }
+  </script>
+</body>
+</html>
