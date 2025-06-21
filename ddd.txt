@@ -140,3 +140,90 @@ Place it inside your <head> tag:
 ⸻
 
 Let me know if you want to display multiple outputs like Q0.0, Q0.1, Q0.2, or show text like "ON" / "OFF" instead of just 1/0 — I can tweak it for that too.
+<!-- AWP_In_Variable Name='"Output_1"' -->
+<!-- AWP_In_Variable Name='"Output_2"' -->
+<!-- AWP_Out_Variable Name='"Tag_3_View"' -->
+<!-- AWP_Out_Variable Name='"Tag_4_View"' -->
+<html>
+<head>
+  <title>SINGLE SWITCH CHECK</title>
+  <script>
+    // Save scroll position before page reload
+    window.addEventListener("beforeunload", function () {
+      localStorage.setItem("scrollY", window.scrollY);
+    });
+
+    // Restore scroll position after reload
+    window.addEventListener("load", function () {
+      const y = localStorage.getItem("scrollY");
+      if (y !== null) {
+        window.scrollTo(0, parseInt(y));
+        localStorage.removeItem("scrollY");
+      }
+    });
+  </script>
+  <style>
+    .control-row {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      margin-bottom: 20px;
+    }
+    .spacer {
+      height: 1000px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Control Section - Output 1</h2>
+
+  <div class="control-row">
+    <div>
+      <form method="GET">
+        <input type="submit" value="START SWITCH 1">
+        <input type="hidden" name='"Output_1"' value="1">
+      </form>
+
+      <form method="GET">
+        <input type="submit" value="STOP SWITCH 1">
+        <input type="hidden" name='"Output_1"' value="0">
+      </form>
+
+      <p>Relay 1 Status: := "Output_1" :</p>
+    </div>
+
+    <div>
+      <p><b>Tag_3 Status:</b> := "Tag_3_View" :</p>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <h2>Control Section - Output 2</h2>
+
+  <div class="control-row">
+    <div>
+      <form method="GET">
+        <input type="submit" value="START SWITCH 2">
+        <input type="hidden" name='"Output_2"' value="1">
+      </form>
+
+      <form method="GET">
+        <input type="submit" value="STOP SWITCH 2">
+        <input type="hidden" name='"Output_2"' value="0">
+      </form>
+
+      <p>Relay 2 Status: := "Output_2" :</p>
+    </div>
+
+    <div>
+      <p><b>Tag_4 Status:</b> := "Tag_4_View" :</p>
+    </div>
+  </div>
+
+</body>
+</html>
+
+
+Iska code
