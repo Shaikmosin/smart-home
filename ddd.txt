@@ -1,1 +1,65 @@
- nsdm cdsm c
+
+<html>
+<!-- AWP_In_Variable Name="Output_1" -->
+<!-- AWP_In_Variable Name="Output_2" -->
+<!-- AWP_In_Variable Name="Output_3" -->
+<!-- AWP_In_Variable Name="Output_4" -->
+<head>
+    <title> TIA Portal V19 Web page </title>
+</head>
+<body>
+    <form>
+        <text> PLC S7-1200 WEB PAGE BASIC CONTROL </text>
+    </form>
+
+    <form>
+        <input type="submit" value="START SWITCH1">
+        <input type="hidden" name="Output_1" value="1">
+    </form>
+
+    <form>
+        <input type="submit" value="STOP SWITCH1">
+        <input type="hidden" name="Output_1" value="0">
+    </form>
+
+    <form>
+        <input type="submit" value="START SWITCH2">
+        <input type="hidden" name="Output_2" value="0">
+    </form>
+
+    <form>
+        <input type="submit" value="STOP SWITCH2">
+        <input type="hidden" name="Output_2" value="1">
+    </form>
+
+    <form>
+        <input type="submit" value="START SWITCH3">
+        <input type="hidden" name="Output_3" value="1">
+    </form>
+    
+    <form>
+        <input type="submit" value="STOP SWITCH3">
+        <input type="hidden" name="Output_3" value="0">
+    </form>
+ <form>
+        <input type="submit" value="START SWITCH4">
+        <input type="hidden" name="Output_4" value="1">
+    </form>
+    
+    <form>
+        <input type="submit" value="STOP SWITCH4">
+        <input type="hidden" name="Output_4" value="0">
+ </form>
+    
+    <form>
+Relay 1 : :="Output_1":
+<form>
+Relay 2 : :="Output_2":
+<form>
+Relay 3 : :="Output_3":
+
+Relay 4 : :="Output_4":
+
+ </form>
+</body>
+</html>
