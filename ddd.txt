@@ -63,3 +63,80 @@ Relay 4 : :="Output_4":
  </form>
 </body>
 </html>
+
+
+
+Great question, Chintu! To show the real-time status of a PLC output like Q0.0 on your user-defined HTML page served from the Siemens S7-1200 Web Server, you need to use AWP tags in your HTML.
+
+⸻
+
+✅ Step-by-Step to Show Q0.0 Status on the Web Page
+
+⸻
+
+🔧 1. In TIA Portal
+
+✅ Make Q0.0 available to the web server:
+	1.	Go to your PLC tags (or Global Tags)
+	2.	Create a tag called e.g. "Output_1" and assign it to Q0.0
+	3.	Right-click on the tag → go to Web Publishing
+	4.	Enable the checkboxes:
+	•	✅ Visible on web page
+	•	✅ Readable (write access not needed here)
+
+⸻
+
+🧾 2. In Your HTML Page (User-defined page)
+
+At the top of the page, include this AWP variable declaration:
+
+<!-- AWP_Out_Variable Name='"Output_1"' -->
+
+Now, inside the body where you want to display the status, use this:
+
+<p>Fan Status: <!--#Output_1--></p>
+
+💡 This comment tag (<!--#Output_1-->) will be replaced automatically by the PLC’s web server at runtime with 0 or 1.
+
+⸻
+
+✅ Example Complete Code Snippet:
+
+<!-- AWP_Out_Variable Name='"Output_1"' -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fan Status</title>
+</head>
+<body>
+  <h2>Fan Output Monitor</h2>
+  <p>Current Status of Q0.0: <!--#Output_1--></p>
+</body>
+</html>
+
+
+⸻
+
+🔄 Bonus (Auto-refresh)
+
+The HTML page doesn’t auto-refresh unless you tell it to. Add this to auto-refresh every 1 second:
+
+<meta http-equiv="refresh" content="1">
+
+Place it inside your <head> tag:
+
+<head>
+  <meta http-equiv="refresh" content="1">
+  <title>Fan Status</title>
+</head>
+
+
+⸻
+
+⚠️ Note
+	•	This only works when the HTML file is uploaded into the PLC Web Server in TIA Portal (User-defined Pages)
+	•	You cannot test this on your laptop browser locally — it will just show the raw comment tag
+
+⸻
+
+Let me know if you want to display multiple outputs like Q0.0, Q0.1, Q0.2, or show text like "ON" / "OFF" instead of just 1/0 — I can tweak it for that too.
