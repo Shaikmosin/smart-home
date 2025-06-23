@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<!-- AWP_In_Variable Name='"Output_1"' -->
+<!-- AWP_In_Variable Name='"Output_2"' -->
+<!-- AWP_In_Variable Name='"Output_3"' -->
+
+<head>
+  <title>Login - Smart Hostel Control</title>
+</head>
+<body>
+  <h2>Login Page</h2>
+  <div id="login-section">
+    <form onsubmit="return handleLogin(event)">
+      <label>Username: <input type="text" id="username"></label><br><br>
+      <label>Password: <input type="password" id="password"></label><br><br>
+      <input type="submit" value="Login">
+    </form>
+  </div>
+
+  <!-- User 1 Control Page -->
+  <div id="user1-controls" style="display:none;">
+    <h2>User: Dheeraj</h2>
+    <form method="GET">
+      <input type="submit" value="ON Output_1">
+      <input type="hidden" name='"Output_1"' value="1">
+    </form>
+    <form method="GET">
+      <input type="submit" value="OFF Output_1">
+      <input type="hidden" name='"Output_1"' value="0">
+    </form>
+
+    <form method="GET">
+      <input type="submit" value="ON Output_2">
+      <input type="hidden" name='"Output_2"' value="1">
+    </form>
+    <form method="GET">
+      <input type="submit" value="OFF Output_2">
+      <input type="hidden" name='"Output_2"' value="0">
+    </form>
+
+    <form method="GET">
+      <input type="submit" value="ON Output_3">
+      <input type="hidden" name='"Output_3"' value="1">
+    </form>
+    <form method="GET">
+      <input type="submit" value="OFF Output_3">
+      <input type="hidden" name='"Output_3"' value="0">
+    </form>
+
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <!-- Warden Control Page -->
+  <div id="warden-controls" style="display:none;">
+    <h2>User: Warden</h2>
+    <form method="GET">
+      <input type="submit" value="ON Output_1">
+      <input type="hidden" name='"Output_1"' value="1">
+    </form>
+    <form method="GET">
+      <input type="submit" value="OFF Output_1">
+      <input type="hidden" name='"Output_1"' value="0">
+    </form>
+
+    <form method="GET">
+      <input type="submit" value="ON Output_2">
+      <input type="hidden" name='"Output_2"' value="1">
+    </form>
+    <form method="GET">
+      <input type="submit" value="OFF Output_2">
+      <input type="hidden" name='"Output_2"' value="0">
+    </form>
+
+    <form method="GET">
+      <input type="submit" value="ON Output_3">
+      <input type="hidden" name='"Output_3"' value="1">
+    </form>
+    <form method="GET">
+      <input type="submit" value="OFF Output_3">
+      <input type="hidden" name='"Output_3"' value="0">
+    </form>
+
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    const users = {
+      dheeraj: '1234',
+      kouser: '12345',
+      dsp: '123456',
+      warden: 'admin'
+    };
+
+    function handleLogin(event) {
+      event.preventDefault();
+      const user = document.getElementById('username').value.toLowerCase();
+      const pass = document.getElementById('password').value;
+
+      if (users[user] === pass) {
+        if (user === 'dheeraj') {
+          document.getElementById('login-section').style.display = 'none';
+          document.getElementById('user1-controls').style.display = 'block';
+          localStorage.setItem('loggedIn', 'user1');
+        } else if (user === 'warden') {
+          document.getElementById('login-section').style.display = 'none';
+          document.getElementById('warden-controls').style.display = 'block';
+          localStorage.setItem('loggedIn', 'warden');
+        } else {
+          alert('Access Denied: This user has no control permissions.');
+        }
+      } else {
+        alert('Invalid credentials');
+      }
+    }
+
+    // Restore previous page state after reload
+    window.addEventListener('load', () => {
+      const view = localStorage.getItem('loggedIn');
+      if (view === 'user1') {
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('user1-controls').style.display = 'block';
+      } else if (view === 'warden') {
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('warden-controls').style.display = 'block';
+      }
+    });
+
+    function logout() {
+      localStorage.removeItem('loggedIn');
+      location.reload();
+    }
+  </script>
+</body>
+</html>
