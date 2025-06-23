@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- AWP_In_Variable Name='"Output_1"' -->
+<!-- AWP_In_Variable Name='"Output_2"' -->
+<!-- AWP_In_Variable Name='"Output_3"' -->
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Hostel PLC Version</title>
+  <style>
+    /* ... (keep your styles as in your file) ... */
+    body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(to right, #6a11cb, #2575fc); }
+    .card { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); width: 300px; margin: 10px; text-align: center; }
+    .dashboard { width: 90%; max-width: 800px; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
+    .device-toggle { display: flex; justify-content: space-around; margin-top: 20px; }
+    .hidden { display: none; }
+    /* ... (other styles as needed) ... */
+  </style>
+</head>
+<body>
+  <!-- Welcome Message -->
+  <div id="welcome" class="welcome">Welcome to Smart Hostel</div>
+  <!-- Role Selection -->
+  <div id="role-selection" class="role-selection hidden">
+    <h1 id="role-heading">Smart Hostel</h1>
+    <div class="role-options">
+      <div class="card" onclick="selectRole('student')">I am a Student</div>
+      <div class="card" onclick="selectRole('warden')">I am a Warden</div>
+    </div>
+  </div>
+  <!-- Student Login -->
+  <div id="student-login" class="card hidden">
+    <h3>Student Login</h3>
+    <input type="text" id="student-id" placeholder="Student ID">
+    <input type="password" id="student-password" placeholder="Password">
+    <button onclick="studentLogin()">Login</button>
+  </div>
+  <!-- Warden Login -->
+  <div id="warden-login" class="card hidden">
+    <h3>Warden Login</h3>
+    <input type="text" id="warden-user" placeholder="Username">
+    <input type="password" id="warden-pass" placeholder="Password">
+    <button onclick="wardenLogin()">Login</button>
+  </div>
+  <!-- Student Dashboard -->
+  <div id="student-dashboard" class="dashboard hidden">
+    <h2>Room 1</h2>
+    <div class="device-toggle">
+      <!-- Light Control -->
+      <form method="POST">
+        <input type="hidden" name='"Output_1"' value="1">
+        <button type="submit">Light ON</button>
+      </form>
+      <form method="POST">
+        <input type="hidden" name='"Output_1"' value="0">
+        <button type="submit">Light OFF</button>
+      </form>
+      <!-- Fan Control -->
+      <form method="POST">
+        <input type="hidden" name='"Output_2"' value="1">
+        <button type="submit">Fan ON</button>
+      </form>
+      <form method="POST">
+        <input type="hidden" name='"Output_2"' value="0">
+        <button type="submit">Fan OFF</button>
+      </form>
+      <!-- Socket Control -->
+      <form method="POST">
+        <input type="hidden" name='"Output_3"' value="1">
+        <button type="submit">Socket ON</button>
+      </form>
+      <form method="POST">
+        <input type="hidden" name='"Output_3"' value="0">
+        <button type="submit">Socket OFF</button>
+      </form>
+    </div>
+    <button onclick="logout()">Logout</button>
+  </div>
+  <!-- Warden Dashboard (same controls, can be expanded for all rooms) -->
+  <div id="warden-dashboard" class="dashboard hidden">
+    <h2>Warden Control - Room 1</h2>
+    <div class="device-toggle">
+      <!-- Light Control -->
+      <form method="POST">
+        <input type="hidden" name='"Output_1"' value="1">
+        <button type="submit">Light ON</button>
+      </form>
+      <form method="POST">
+        <input type="hidden" name='"Output_1"' value="0">
+        <button type="submit">Light OFF</button>
+      </form>
+      <!-- Fan Control -->
+      <form method="POST">
+        <input type="hidden" name='"Output_2"' value="1">
+        <button type="submit">Fan ON</button>
+      </form>
+      <form method="POST">
+        <input type="hidden" name='"Output_2"' value="0">
+        <button type="submit">Fan OFF</button>
+      </form>
+      <!-- Socket Control -->
+      <form method="POST">
+        <input type="hidden" name='"Output_3"' value="1">
+        <button type="submit">Socket ON</button>
+      </form>
+      <form method="POST">
+        <input type="hidden" name='"Output_3"' value="0">
+        <button type="submit">Socket OFF</button>
+      </form>
+    </div>
+    <button onclick="logout()">Logout</button>
+  </div>
+  <script>
+    // UI logic for role selection and login
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.getElementById('welcome').classList.add('hidden');
+        document.getElementById('role-selection').classList.remove('hidden');
+      }, 2000);
+    });
+    function selectRole(role) {
+      hideElement('student-login');
+      hideElement('warden-login');
+      hideElement('student-dashboard');
+      hideElement('warden-dashboard');
+      document.getElementById('role-selection').classList.add('hidden');
+      if (role === 'student') showElement('student-login');
+      else showElement('warden-login');
+    }
+    function studentLogin() {
+      // Demo: allow any login
+      hideElement('student-login');
+      showElement('student-dashboard');
+    }
+    function wardenLogin() {
+      // Demo: allow only admin/admin123
+      const u = document.getElementById('warden-user').value;
+      const p = document.getElementById('warden-pass').value;
+      if (u === 'admin' && p === 'admin123') {
+        hideElement('warden-login');
+        showElement('warden-dashboard');
+      } else {
+        alert('Invalid credentials');
+      }
+    }
+    function showElement(id) { document.getElementById(id).classList.remove('hidden'); }
+    function hideElement(id) { document.getElementById(id).classList.add('hidden'); }
+    function logout() {
+      showElement('role-selection');
+      hideElement('student-login');
+      hideElement('warden-login');
+      hideElement('student-dashboard');
+      hideElement('warden-dashboard');
+    }
+  </script>
+</body>
+</html>
+
+
+
+Ye code kaam karra but login nai hai isku aur zaldi se logout hojara
